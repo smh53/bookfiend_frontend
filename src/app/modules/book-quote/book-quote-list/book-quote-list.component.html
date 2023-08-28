@@ -1,0 +1,84 @@
+<mat-card>
+    <mat-card-header >
+      <mat-card-title style="margin-bottom: 23%;">Quotes</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content style="height: max-content;">
+      <div style="height: 2rem;;"></div>
+    
+  <div style="height: 2rem;;"></div>
+  
+  <div class="mat-elevation-z0">
+    <div class="flex-content">
+    <mat-form-field class="filter-column-align">
+      <input matInput [formControl]="quoteFilter" placeholder="Search quotes">
+    </mat-form-field>
+    
+
+    <mat-form-field class="filter-column-align">  
+        <input matInput [formControl]="pageNumberFilter" placeholder="Search page number">
+      </mat-form-field>  
+      <mat-form-field class="filter-column-align">  
+        <input matInput [formControl]="bookNameFilter" placeholder="Search book names">
+      </mat-form-field>  
+    
+    <button class="push-right-b"  mat-mini-fab matTooltip="Add quote" color="primary" (click)="openAddBookQuoteDialog()"><mat-icon>add</mat-icon></button> 
+  </div>
+  
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    
+
+    <ng-container matColumnDef="quote">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Quote</th>
+      <td mat-cell *matCellDef="let bookQuote"> {{bookQuote.quote}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pageNumber">  
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Page Number</th>
+      <td mat-cell *matCellDef="let bookQuote"> {{bookQuote.pageNumber}} </td> 
+    </ng-container>
+
+    <ng-container matColumnDef="book.name">     
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Book Name</th>
+        <td mat-cell *matCellDef="let bookQuote"> {{bookQuote.book.name}} </td> 
+    </ng-container>
+
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let bookQuote"> 
+        <button mat-icon-button matTooltip="Edit quote" 
+          color="basic" (click)="openEditBookQuoteDialog(bookQuote)" >
+            <mat-icon>edit</mat-icon>
+        </button> 
+        <button mat-icon-button matTooltip="Delete quote" 
+        color="warn" [swal]="['Are you sure you want to delete?','You can\'t undo this action.', 'question']" (confirm)="deleteBookQuote(bookQuote)" >
+          <mat-icon>delete</mat-icon>    
+      </button> 
+      </td>    
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+     
+     <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data </td>
+    </tr>
+  
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    
+  
+   
+  </div>
+    </mat-card-content>
+    
+  </mat-card>
+  <div style="height: 2rem;"></div>
+  
+  
+  
+  
+  

@@ -1,0 +1,24 @@
+.mat-table {
+    width: 100%;
+   
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 15%;
+  }
+
+.filter-column-align {
+  width: 19%;
+  margin-left: 8px;
+}
+.flex-content{
+  display: flex;
+}
+.push-right-b {
+  margin-left: auto;
+}

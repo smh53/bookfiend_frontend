@@ -1,0 +1,102 @@
+<mat-card>
+    <mat-card-header >
+      <mat-card-title style="margin-bottom: 23%;">Book List</mat-card-title>
+    </mat-card-header>
+  
+    <mat-card-content style="height: max-content;">
+      <div style="height: 2rem;;"></div>
+    
+  <div style="height: 2rem;;"></div>
+  
+  <div class="mat-elevation-z0">
+    <div class="flex-content">
+    <mat-form-field class="filter-column-align">
+      <input matInput [formControl]="nameFilter" placeholder="Search book names">
+    </mat-form-field>
+   
+
+    <mat-form-field class="filter-column-align">  
+        <input matInput [formControl]="authorFirstNameFilter" placeholder="Search author first name">
+      </mat-form-field>  
+
+      <mat-form-field class="filter-column-align">  
+        <input matInput [formControl]="authorLastNameFilter" placeholder="Search author last name">
+      </mat-form-field>  
+
+      
+
+      <mat-form-field class="filter-column-align">  
+        <input matInput [formControl]="publishYearFilter" placeholder="Search publish years">
+      </mat-form-field>  
+  
+    <button class="push-right-b"  mat-mini-fab matTooltip="Add Book" color="primary" (click)="openAddBookDialog()"><mat-icon>add</mat-icon></button> 
+  </div>
+  
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let book"> {{book.name}} </td>
+    </ng-container>
+
+ 
+
+    <ng-container matColumnDef="author.firstName">     
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Author First Name</th>
+        <td mat-cell *matCellDef="let book"> {{book.author.firstName}} </td> 
+    </ng-container>
+
+    <ng-container matColumnDef="author.lastName">     
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Author Last Name</th>
+      <td mat-cell *matCellDef="let book"> {{ book.author.lastName}} </td> 
+  </ng-container>
+
+ 
+
+    <ng-container matColumnDef="publishYear">     
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Publish Year</th>
+        <td mat-cell *matCellDef="let book"> {{book.publishYear}} </td> 
+    </ng-container>
+
+   
+
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let book"> 
+        <button mat-icon-button matTooltip="Edit {{book.lastName}}" 
+          color="basic" (click)="openEditBookDialog(book)" >
+            <mat-icon>edit</mat-icon>
+        </button> 
+        <button mat-icon-button matTooltip="Delete {{book.lastName}}" 
+        color="warn" [swal]="['Are you sure you want to delete?','You can\'t undo this action.', 'question']" (confirm)="deleteBook(book)" >
+          <mat-icon>delete</mat-icon>    
+      </button> 
+      </td>    
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+     
+     <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data </td>
+    </tr>
+  
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    
+  
+   
+  </div>
+    </mat-card-content>
+    
+  </mat-card>
+  <div style="height: 2rem;"></div>
+  
+  
+  
+  
+  

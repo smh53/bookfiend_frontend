@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Add Book</h1>
+<div mat-dialog-content>
+    <div>
+  <mat-form-field class="dialog-width">
+    <mat-label>Book Name</mat-label>
+    <input matInput [(ngModel)]="book.name">
+  </mat-form-field>
+</div>
+
+
+
+  <div>
+    <mat-form-field class="dialog-width">
+      <mat-label>Publish Year</mat-label>
+      <input matInput [(ngModel)]="book.publishYear">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field class="dialog-width">
+      <mat-label>Author</mat-label>
+      <input type="text"
+             placeholder="Pick author"
+             aria-label="Text"
+             matInput
+             [formControl]="authorControl"          
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let author of filteredAuthors | async" [value]="author">
+          {{author.firstName + " " + author.lastName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+<button mat-raised-button color="primary" (click)="onConfirm()" cdkFocusInitial>Add</button>
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  
+</div>

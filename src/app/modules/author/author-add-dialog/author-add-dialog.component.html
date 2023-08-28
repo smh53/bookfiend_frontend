@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Add author</h1>
+<div mat-dialog-content>
+    <div class="col-md-6">
+  <mat-form-field>
+    <mat-label>Author First Name</mat-label>
+    <input matInput [(ngModel)]="data.firstName">
+  </mat-form-field>
+</div>
+<div class="col-md-6">
+
+
+  <mat-form-field>
+    <mat-label>Author Last Name</mat-label>
+    <input matInput [(ngModel)]="data.lastName">
+  </mat-form-field>
+</div>
+</div>
+<div mat-dialog-actions>
+<button mat-raised-button color="primary" (click)="onConfirm()" cdkFocusInitial>Add</button>
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  
+</div>
