@@ -14,7 +14,7 @@
   Liked it? Hit that star button.
 
 # Overview
-  A frontend project for my [Bookfiend](https://github.com/smh53/Bookfiend) project. Designed with Angular (16.2.0). Used Material Design components for Angular
+  A frontend project for my [Bookfiend](https://github.com/smh53/Bookfiend) project. Designed with Angular (16.2.0). Used Material Design components
 
  # Usage
 
