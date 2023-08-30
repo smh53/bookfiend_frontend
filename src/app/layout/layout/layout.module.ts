@@ -17,12 +17,13 @@ import { NavigatiorComponent } from '../navigatior/navigatior.component';
 import { BookModule } from 'src/app/modules/book/book.module';
 import { BookQuoteModule } from 'src/app/modules/book-quote/book-quote.module';
 import {MatMenuModule} from '@angular/material/menu';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 @NgModule({
   declarations: [
     LayoutComponent,
     FooterComponent,
-    NavigatiorComponent
+    NavigatiorComponent,
+  
   ],
   imports: [
     CommonModule,
@@ -39,7 +40,9 @@ import {MatMenuModule} from '@angular/material/menu';
     BookModule,
     BookQuoteModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatExpansionModule
+
     
     
     

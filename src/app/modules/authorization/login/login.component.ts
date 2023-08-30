@@ -4,7 +4,8 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { propertyOf } from 'lodash';
 import { ErrorDialog } from 'src/app/constants/notifications/sw2-dialog';
-import { LoginRequest } from 'src/models/authorization';
+import { TOKEN_INFO_NAME } from 'src/app/constants/token';
+import { LoginRequest, LoginResponse } from 'src/models/authorization';
 import { AuthorizationService } from 'src/services/authorization/authorization.service';
 
 
@@ -14,6 +15,7 @@ import { AuthorizationService } from 'src/services/authorization/authorization.s
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  
     submitted!: boolean;
     hide = true;
     public loginForm = this._formBuilder.group({
@@ -66,7 +68,11 @@ export class LoginComponent {
 
       },
       complete: () => {
-        
+        var loginResponse = JSON.parse(localStorage.getItem(TOKEN_INFO_NAME)!) as LoginResponse
+        const jwtToken = JSON.parse(atob(loginResponse.token.split('.')[1]));
+        const expires = new Date(jwtToken.exp * 1000);
+        const timeout = expires.getTime() - Date.now();
+        setTimeout(() => this._authorizationService.logout(), timeout);
       }
     })
   }

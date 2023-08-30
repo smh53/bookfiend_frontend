@@ -2,3 +2,7 @@
     flex: 1 1 auto;
   }
   
+.align-icon {
+  vertical-align: sub;
+}
+

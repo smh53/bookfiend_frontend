@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { TOKEN_INFO_NAME } from 'src/app/constants/token';
+import { LoginResponse } from 'src/models/authorization';
 
 @Component({
   selector: 'app-layout',
@@ -6,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent {
+
+ 
 
 }
