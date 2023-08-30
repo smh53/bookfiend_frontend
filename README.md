@@ -1,27 +1,50 @@
-# Bookfiend
+### Bookfiend Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
 
-## Development server
+- [Let's get STAR ted ⭐!](#star-pls-)
+- [Overview](#overview)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Disclaimer](#disclaimer)
+- [License](#license)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Let's get STAR ted ⭐!
+  Liked it? Hit that star button.
 
-## Build
+# Overview
+  A frontend project for my [Bookfiend](https://github.com/smh53/Bookfiend) project. Designed with Angular (16.2.0). Used Material Design components
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+ # Usage
 
-## Running unit tests
+`git clone https://github.com/smh53/Bookfiend_frontend` 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Screenshots
+   - Dynamic CRUD operations on complex entities
+     
+      ![create-update-2023-7-29](https://github.com/smh53/bookfiend_frontend/assets/39862947/14599ed1-4ef5-40ce-bca7-08a59cae6ae0)
+      
+     ![deleting-2023-7-29](https://github.com/smh53/bookfiend_frontend/assets/39862947/f78d3d8f-d96f-4e7c-ab05-736e82632fff)
 
-## Running end-to-end tests
+   - JWT claim based authorization and some client side validation for ya
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+       
+       ![login-logout-2023-7-29](https://github.com/smh53/bookfiend_frontend/assets/39862947/11bf7a33-a906-4636-8f87-21306d3a0bf1)
 
-## Further help
+  - Multiple column filtering
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    ![multiple-filtering-2023-7-29](https://github.com/smh53/bookfiend_frontend/assets/39862947/357ed4e6-e052-4b6c-a122-9e5e977a41d6)
+
+    
+    
+
+# Disclaimer
+
+This project is created for educational purposes. The source code is licensed under the MIT license.
+
+# License
+
+This project is licensed under the terms of the [MIT](https://github.com/smh53/Bookfiend/blob/master/LICENSE.txt) license.
+
+
