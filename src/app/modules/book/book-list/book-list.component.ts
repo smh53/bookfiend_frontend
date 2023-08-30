@@ -13,6 +13,8 @@ import { AuthorService } from 'src/services/author/author.service';
 import { Author } from 'src/models/author';
 import { BookEditDialogComponent } from '../book-edit-dialog/book-edit-dialog.component';
 import * as lodash from 'lodash';
+import { AuthorizationService } from 'src/services/authorization/authorization.service';
+import { CLAIMTYPES, CLAIMVALUES } from 'src/app/constants/authorization/claims';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
@@ -20,6 +22,9 @@ import * as lodash from 'lodash';
 })
 export class BookListComponent {
   public authors: Author[] = [];
+  permissionCreate!: boolean;
+  permissionDelete!: boolean;
+  permissionUpdate!: boolean;
   displayedColumns: string[] = ['name','author.firstName','author.lastName','publishYear', 'actions'];
   dataSource!: MatTableDataSource<BookResponse>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,6 +45,7 @@ export class BookListComponent {
   (
     private _bookService: BookService,
     private _authorService: AuthorService,
+    private _authorizationService: AuthorizationService,
     public dialog: MatDialog
     
   ) {
@@ -47,6 +53,12 @@ export class BookListComponent {
 }
 
 ngOnInit() {
+  
+  this.permissionCreate = this._authorizationService.checkClaims(CLAIMTYPES.book,CLAIMVALUES.create);
+  this.permissionDelete = this._authorizationService.checkClaims(CLAIMTYPES.book,CLAIMVALUES.delete);
+  this.permissionUpdate = this._authorizationService.checkClaims(CLAIMTYPES.book,CLAIMVALUES.update);
+  
+
   this.getBookList();
 
   this.nameFilter.valueChanges

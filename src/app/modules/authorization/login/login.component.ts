@@ -4,7 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { propertyOf } from 'lodash';
 import { ErrorDialog } from 'src/app/constants/notifications/sw2-dialog';
-import { TOKEN_INFO_NAME } from 'src/app/constants/token';
+import { TOKEN_INFO_NAME } from 'src/app/constants/authorization/token';
 import { LoginRequest, LoginResponse } from 'src/models/authorization';
 import { AuthorizationService } from 'src/services/authorization/authorization.service';
 

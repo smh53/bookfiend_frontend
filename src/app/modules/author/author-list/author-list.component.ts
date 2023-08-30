@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 import { AuthorEditDialogComponent } from '../author-edit-dialog/author-edit-dialog.component';
 import { AuthorAddDialogComponent } from '../author-add-dialog/author-add-dialog.component';
 import { ErrorDialog } from 'src/app/constants/notifications/sw2-dialog';
+import { CLAIMTYPES, CLAIMVALUES } from 'src/app/constants/authorization/claims';
+import { AuthorizationService } from 'src/services/authorization/authorization.service';
 
 @Component({
   selector: 'app-author-list',
@@ -18,6 +20,9 @@ import { ErrorDialog } from 'src/app/constants/notifications/sw2-dialog';
   styleUrls: ['./author-list.component.css']
 })
 export class AuthorListComponent {
+  permissionCreate!: boolean;
+  permissionDelete!: boolean;
+  permissionUpdate!: boolean;
   public authors: Author[] = [];
   displayedColumns: string[] = ['firstName', 'lastName', 'actions'];
   dataSource!: MatTableDataSource<Author>;
@@ -33,6 +38,7 @@ export class AuthorListComponent {
   constructor
     (
       private _authorService: AuthorService,
+      private _authorizationService: AuthorizationService,
       public dialog: MatDialog
       
     ) {
@@ -40,6 +46,13 @@ export class AuthorListComponent {
   }
   
   ngOnInit() {
+
+    this.permissionCreate = this._authorizationService.checkClaims(CLAIMTYPES.author,CLAIMVALUES.create);
+    this.permissionDelete = this._authorizationService.checkClaims(CLAIMTYPES.author,CLAIMVALUES.delete);
+    this.permissionUpdate = this._authorizationService.checkClaims(CLAIMTYPES.author,CLAIMVALUES.update);
+  
+    
+    
     this.getAuthorList();
 
     this.firstNameFilter.valueChanges

@@ -21,4 +21,5 @@
 }
 .push-right-b {
   margin-left: auto;
+  height: min-content;
 }

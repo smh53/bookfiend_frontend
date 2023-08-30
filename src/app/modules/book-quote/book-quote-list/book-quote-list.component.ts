@@ -13,6 +13,8 @@ import { BookQuoteService } from 'src/services/book-quote/book-quote.service';
 import { BookService } from 'src/services/book/book.service';
 import { BookQuoteAddDialogComponent } from '../book-quote-add-dialog/book-quote-add-dialog.component';
 import { BookQuoteEditDialogComponent } from '../book-quote-edit-dialog/book-quote-edit-dialog.component';
+import { AuthorizationService } from 'src/services/authorization/authorization.service';
+import { CLAIMTYPES, CLAIMVALUES } from 'src/app/constants/authorization/claims';
 
 @Component({
   selector: 'app-book-quote-list',
@@ -20,6 +22,9 @@ import { BookQuoteEditDialogComponent } from '../book-quote-edit-dialog/book-quo
   styleUrls: ['./book-quote-list.component.css']
 })
 export class BookQuoteListComponent {
+  permissionCreate!: boolean;
+  permissionDelete!: boolean;
+  permissionUpdate!: boolean;
   public books: BookResponse[] = [];
   displayedColumns: string[] = ['quote', 'pageNumber','book.name','actions'];
   dataSource!: MatTableDataSource<BookQuoteResponse>;
@@ -41,6 +46,7 @@ export class BookQuoteListComponent {
   (
     private _bookQuoteService: BookQuoteService,
     private _bookService: BookService,
+    private _authorizationService: AuthorizationService,
     public dialog: MatDialog
     
   ) {
@@ -48,6 +54,12 @@ export class BookQuoteListComponent {
 }
 
 ngOnInit() {
+
+  this.permissionCreate = this._authorizationService.checkClaims(CLAIMTYPES.bookQuote,CLAIMVALUES.create);
+  this.permissionDelete = this._authorizationService.checkClaims(CLAIMTYPES.bookQuote,CLAIMVALUES.delete);
+  this.permissionUpdate = this._authorizationService.checkClaims(CLAIMTYPES.bookQuote,CLAIMVALUES.update);
+  
+
   this.getBookQuoteList();
 
   this.quoteFilter.valueChanges
