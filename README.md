@@ -45,11 +45,11 @@
 
     ![multiple-filtering-2023-7-29](https://github.com/smh53/bookfiend_frontend/assets/39862947/357ed4e6-e052-4b6c-a122-9e5e977a41d6)
 
-  - Basic message broker (RabbitMQ) implementation.
-      - When an author is deleted, their information is sent to the queue and the background service listening to this queue logs this information.
+  - Basic message broker (RabbitMQ) and Remote Procedure Call (SignalR) implementation.
+      - When an ```Author``` is deleted, their information is sent to the queue and the background service listening to this queue logs this information and sends it back to all clients via ```SignalR```.
     
     ![rabbitmq-bgservice-2023-8-7](https://github.com/smh53/bookfiend_frontend/assets/39862947/5d5fee58-d371-4677-84c4-6586491171c0)
-
+    ![signalr-rabbit-not-2023-8-10 (1)](https://github.com/smh53/bookfiend_frontend/assets/39862947/adf81909-ed46-4621-9764-1fb20a3898c7)
 
 # Disclaimer
 
