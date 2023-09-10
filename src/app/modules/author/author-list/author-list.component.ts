@@ -10,10 +10,11 @@ import { AuthorService } from 'src/services/author/author.service';
 import Swal from 'sweetalert2';
 import { AuthorEditDialogComponent } from '../author-edit-dialog/author-edit-dialog.component';
 import { AuthorAddDialogComponent } from '../author-add-dialog/author-add-dialog.component';
-import { ErrorDialog } from 'src/app/constants/notifications/sw2-dialog';
+import { ErrorDialog, InfoDialog } from 'src/app/constants/notifications/sw2-dialog';
 import { CLAIMTYPES, CLAIMVALUES } from 'src/app/constants/authorization/claims';
 import { AuthorizationService } from 'src/services/authorization/authorization.service';
-
+import * as signalR from '@microsoft/signalr';
+import { environment } from 'src/environments/environment.development';
 @Component({
   selector: 'app-author-list',
   templateUrl: './author-list.component.html',
@@ -46,6 +47,35 @@ export class AuthorListComponent {
   }
   
   ngOnInit() {
+    const connection = new signalR.HubConnectionBuilder()
+    .configureLogging(signalR.LogLevel.Information)
+    .withUrl(environment.endPoint +"AuthorHub")
+    
+    .build();
+
+    connection.start().then(function () {
+      console.log('signalR Connected!');
+      
+
+    }).catch(function(err) {
+      return console.error(err.toString())
+    });
+
+    connection.on("AuthorDeleted", (deletedAutor: string, ) => {
+     var jsonDeletedAuthor = JSON.parse(deletedAutor);
+    
+      console.log(jsonDeletedAuthor);
+     
+      Toast.fire({
+        title: 'Notification',
+        icon: 'info',
+        text: 'Author '  +' ' + jsonDeletedAuthor.FirstName + ' ' + jsonDeletedAuthor.LastName + ' deleted',
+        
+      })
+      
+    });
+
+    
 
     this.permissionCreate = this._authorizationService.checkClaims(CLAIMTYPES.author,CLAIMVALUES.create);
     this.permissionDelete = this._authorizationService.checkClaims(CLAIMTYPES.author,CLAIMVALUES.delete);

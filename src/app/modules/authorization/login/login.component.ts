@@ -7,7 +7,11 @@ import { ErrorDialog } from 'src/app/constants/notifications/sw2-dialog';
 import { TOKEN_INFO_NAME } from 'src/app/constants/authorization/token';
 import { LoginRequest, LoginResponse } from 'src/models/authorization';
 import { AuthorizationService } from 'src/services/authorization/authorization.service';
+import '@microsoft/signalr';
 
+import { environment } from 'src/environments/environment.development';
+import { Author } from 'src/models/author';
+import { Toast } from 'src/app/constants/notifications/sw2-toast';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +32,7 @@ export class LoginComponent {
       private readonly _authorizationService: AuthorizationService,
       private readonly router: Router,
       private _formBuilder: FormBuilder,
+     
     ) {
 
     }
@@ -50,6 +55,7 @@ export class LoginComponent {
     loginRequest = Object.assign({}, this.loginForm.value);
 
     this._authorizationService.login(loginRequest).subscribe({
+      
       next: (v) => {
         console.log(v);
         if(v != undefined)
@@ -60,11 +66,14 @@ export class LoginComponent {
         }
       },
       error: (e) => {
-        ErrorDialog.fire({
-          title: 'Errror',
-          text: e.error.title
-        })
         this.submitted = false;
+        this.loginForm.reset();
+        Toast.fire({
+          title: 'Error',
+          icon: 'error',
+          text: 'Invalid credentials'
+        })
+       
 
       },
       complete: () => {
@@ -72,6 +81,11 @@ export class LoginComponent {
         const jwtToken = JSON.parse(atob(loginResponse.token.split('.')[1]));
         const expires = new Date(jwtToken.exp * 1000);
         const timeout = expires.getTime() - Date.now();
+
+       
+
+        
+
         setTimeout(() => this._authorizationService.logout(), timeout);
       }
     })
